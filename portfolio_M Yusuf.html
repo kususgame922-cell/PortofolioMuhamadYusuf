@@ -1,0 +1,1130 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Muhamad Yusuf Segaff — Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0d0d0d;
+    --surface: #161616;
+    --card: #1e1e1e;
+    --border: #2a2a2a;
+    --accent: #c8f04d;
+    --accent2: #3a7bd5;
+    --text: #f0ede8;
+    --muted: #7a7a7a;
+    --teal: #2a6b5e;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+    cursor: none;
+  }
+
+  /* Custom cursor */
+  .cursor {
+    width: 10px; height: 10px;
+    background: var(--accent);
+    border-radius: 50%;
+    position: fixed;
+    pointer-events: none;
+    z-index: 9999;
+    transition: transform 0.1s ease;
+    mix-blend-mode: difference;
+  }
+  .cursor-ring {
+    width: 36px; height: 36px;
+    border: 1px solid var(--accent);
+    border-radius: 50%;
+    position: fixed;
+    pointer-events: none;
+    z-index: 9998;
+    opacity: 0.5;
+    transition: left 0.12s ease, top 0.12s ease, width 0.2s, height 0.2s;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.4rem 4rem;
+    background: rgba(13,13,13,0.85);
+    backdrop-filter: blur(16px);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-logo {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: 1.1rem;
+    letter-spacing: 0.05em;
+    color: var(--accent);
+  }
+  .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+  .nav-links a {
+    color: var(--muted);
+    text-decoration: none;
+    font-size: 0.85rem;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--text); }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    padding: 8rem 4rem 4rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero-bg-text {
+    position: absolute;
+    top: 50%; left: -2rem;
+    transform: translateY(-50%);
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(8rem, 20vw, 18rem);
+    font-weight: 800;
+    color: transparent;
+    -webkit-text-stroke: 1px #2a2a2a;
+    white-space: nowrap;
+    pointer-events: none;
+    z-index: 0;
+    user-select: none;
+  }
+  .hero-content {
+    position: relative; z-index: 1;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: center;
+    max-width: 1200px;
+    width: 100%;
+  }
+  .hero-left {}
+  .hero-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: rgba(200,240,77,0.1);
+    border: 1px solid rgba(200,240,77,0.3);
+    border-radius: 100px;
+    padding: 0.35rem 1rem;
+    font-size: 0.78rem;
+    color: var(--accent);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    margin-bottom: 1.5rem;
+    font-weight: 500;
+  }
+  .hero-tag::before {
+    content: '';
+    width: 6px; height: 6px;
+    background: var(--accent);
+    border-radius: 50%;
+    animation: pulse 2s infinite;
+  }
+  @keyframes pulse {
+    0%,100%{ opacity:1; transform:scale(1); }
+    50%{ opacity:0.5; transform:scale(1.4); }
+  }
+  .hero-name {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(2.8rem, 5vw, 4.5rem);
+    font-weight: 800;
+    line-height: 1.05;
+    margin-bottom: 1rem;
+  }
+  .hero-name span { color: var(--accent); }
+  .hero-desc {
+    color: var(--muted);
+    font-size: 1rem;
+    max-width: 400px;
+    margin-bottom: 2.5rem;
+    line-height: 1.75;
+  }
+  .hero-btns { display: flex; gap: 1rem; flex-wrap: wrap; }
+  .btn-primary {
+    background: var(--accent);
+    color: #0d0d0d;
+    border: none;
+    padding: 0.85rem 2rem;
+    border-radius: 100px;
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 0.9rem;
+    text-decoration: none;
+    transition: transform 0.2s, box-shadow 0.2s;
+    display: inline-block;
+  }
+  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(200,240,77,0.25); }
+  .btn-ghost {
+    border: 1px solid var(--border);
+    color: var(--text);
+    padding: 0.85rem 2rem;
+    border-radius: 100px;
+    font-family: 'Syne', sans-serif;
+    font-weight: 600;
+    font-size: 0.9rem;
+    text-decoration: none;
+    transition: border-color 0.2s, background 0.2s;
+    display: inline-block;
+  }
+  .btn-ghost:hover { border-color: var(--accent); background: rgba(200,240,77,0.05); }
+  .hero-right {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .hero-photo-wrap {
+    position: relative;
+    width: 320px; height: 400px;
+  }
+  .hero-photo-bg {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, #1e2e1a 0%, #0d1f1b 100%);
+    border-radius: 24px;
+    border: 1px solid var(--border);
+  }
+  .hero-photo-deco {
+    position: absolute;
+    top: -16px; right: -16px;
+    width: 100px; height: 100px;
+    border: 2px solid var(--accent);
+    border-radius: 16px;
+    opacity: 0.3;
+  }
+  .hero-photo-deco2 {
+    position: absolute;
+    bottom: -12px; left: -12px;
+    width: 70px; height: 70px;
+    background: var(--accent);
+    border-radius: 12px;
+    opacity: 0.08;
+  }
+  .hero-photo {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    overflow: hidden;
+    border-radius: 24px;
+  }
+  .hero-avatar-placeholder {
+    width: 100%; height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 8rem;
+    opacity: 0.15;
+  }
+  .hero-photo-label {
+    position: absolute;
+    bottom: 1.5rem; left: 50%; transform: translateX(-50%);
+    background: rgba(13,13,13,0.9);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 0.75rem 1.25rem;
+    white-space: nowrap;
+    text-align: center;
+  }
+  .hero-photo-label .name { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 1rem; }
+  .hero-photo-label .role { color: var(--muted); font-size: 0.8rem; margin-top: 0.15rem; }
+  .hero-stats {
+    position: absolute;
+    top: 1.5rem; right: -4rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+  .stat-pill {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 0.75rem 1rem;
+    font-size: 0.8rem;
+    white-space: nowrap;
+  }
+  .stat-pill strong {
+    font-family: 'Syne', sans-serif;
+    font-size: 1.2rem;
+    color: var(--accent);
+    display: block;
+  }
+
+  /* SECTION BASE */
+  section { padding: 6rem 4rem; max-width: 1200px; margin: 0 auto; }
+  .section-label {
+    font-size: 0.75rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--accent);
+    font-weight: 600;
+    margin-bottom: 0.75rem;
+  }
+  .section-title {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+    font-weight: 800;
+    line-height: 1.1;
+    margin-bottom: 1rem;
+  }
+  .section-sub { color: var(--muted); max-width: 480px; font-size: 0.95rem; line-height: 1.75; }
+  hr.divider { border: none; border-top: 1px solid var(--border); margin: 0; }
+
+  /* ABOUT */
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.2fr;
+    gap: 5rem;
+    align-items: start;
+    margin-top: 3rem;
+  }
+  .about-skills { margin-top: 2rem; }
+  .skill-item {
+    margin-bottom: 1.25rem;
+  }
+  .skill-header { display: flex; justify-content: space-between; font-size: 0.85rem; margin-bottom: 0.4rem; color: var(--muted); }
+  .skill-header span:last-child { color: var(--accent); font-weight: 600; }
+  .skill-bar {
+    height: 3px;
+    background: var(--border);
+    border-radius: 2px;
+    overflow: hidden;
+  }
+  .skill-fill {
+    height: 100%;
+    background: var(--accent);
+    border-radius: 2px;
+    width: 0;
+    transition: width 1.2s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .about-right p {
+    color: var(--muted);
+    line-height: 1.85;
+    font-size: 0.95rem;
+    margin-bottom: 1.25rem;
+  }
+  .about-right p strong { color: var(--text); font-weight: 500; }
+  .about-info {
+    margin-top: 2rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+  }
+  .info-item { }
+  .info-label { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted); margin-bottom: 0.25rem; }
+  .info-val { font-size: 0.9rem; color: var(--text); font-weight: 500; }
+
+  /* EDUCATION */
+  .edu-grid { margin-top: 3rem; display: flex; flex-direction: column; gap: 1.5rem; }
+  .edu-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 2rem;
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 1.5rem;
+    align-items: center;
+    transition: border-color 0.2s, transform 0.2s;
+  }
+  .edu-card:hover { border-color: var(--accent); transform: translateX(4px); }
+  .edu-icon {
+    width: 52px; height: 52px;
+    background: rgba(200,240,77,0.1);
+    border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.5rem;
+  }
+  .edu-degree { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 1.05rem; }
+  .edu-school { color: var(--muted); font-size: 0.88rem; margin-top: 0.2rem; }
+  .edu-year {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    background: rgba(200,240,77,0.08);
+    color: var(--accent);
+    font-size: 0.78rem;
+    font-weight: 600;
+    padding: 0.25rem 0.75rem;
+    border-radius: 100px;
+    margin-top: 0.5rem;
+  }
+
+  /* EXPERIENCE */
+  .exp-grid { margin-top: 3rem; display: flex; flex-direction: column; gap: 1rem; }
+  .exp-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 2rem;
+    position: relative;
+    overflow: hidden;
+    transition: border-color 0.2s;
+  }
+  .exp-card::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    width: 3px;
+    background: var(--accent);
+    opacity: 0;
+    transition: opacity 0.2s;
+  }
+  .exp-card:hover { border-color: rgba(200,240,77,0.3); }
+  .exp-card:hover::before { opacity: 1; }
+  .exp-header { display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 1rem; margin-bottom: 1rem; }
+  .exp-org { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 1.05rem; }
+  .exp-role { color: var(--muted); font-size: 0.88rem; margin-top: 0.2rem; }
+  .exp-period {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 0.35rem 0.85rem;
+    font-size: 0.78rem;
+    color: var(--muted);
+  }
+  .exp-desc { color: var(--muted); font-size: 0.9rem; line-height: 1.7; }
+
+  /* PROJECTS */
+  .proj-grid {
+    margin-top: 3rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+  }
+  .proj-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    overflow: hidden;
+    transition: transform 0.25s, border-color 0.25s;
+  }
+  .proj-card:hover { transform: translateY(-6px); border-color: rgba(200,240,77,0.3); }
+  .proj-thumb {
+    height: 180px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 4rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .proj-thumb-ui { background: linear-gradient(135deg, #1a1f2e, #0d1520); }
+  .proj-thumb-event { background: linear-gradient(135deg, #1f1a0d, #2a1a0d); }
+  .proj-thumb-finance { background: linear-gradient(135deg, #0d1f1a, #0d2018); }
+  .proj-thumb-deco {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at 70% 30%, rgba(200,240,77,0.07) 0%, transparent 60%);
+  }
+  .proj-body { padding: 1.5rem; }
+  .proj-cat {
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--accent);
+    font-weight: 600;
+    margin-bottom: 0.4rem;
+  }
+  .proj-name { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 1.1rem; margin-bottom: 0.6rem; }
+  .proj-desc { color: var(--muted); font-size: 0.875rem; line-height: 1.7; margin-bottom: 1rem; }
+  .proj-tools { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+  .tool-tag {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 0.2rem 0.65rem;
+    font-size: 0.75rem;
+    color: var(--muted);
+  }
+
+  /* CONTACT */
+  #contact { padding-bottom: 8rem; }
+  .contact-wrap {
+    margin-top: 3rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    align-items: start;
+  }
+  .contact-info { }
+  .contact-item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1.25rem;
+    padding: 1.25rem;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    transition: border-color 0.2s;
+  }
+  .contact-item:hover { border-color: var(--accent); }
+  .contact-icon {
+    width: 44px; height: 44px;
+    background: rgba(200,240,77,0.1);
+    border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.2rem;
+    flex-shrink: 0;
+  }
+  .contact-label { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted); margin-bottom: 0.2rem; }
+  .contact-val { font-weight: 500; font-size: 0.9rem; color: var(--text); }
+  .contact-cta {
+    background: linear-gradient(135deg, #1a2a14, #162518);
+    border: 1px solid rgba(200,240,77,0.2);
+    border-radius: 20px;
+    padding: 2.5rem;
+  }
+  .contact-cta h3 { font-family: 'Syne', sans-serif; font-size: 1.6rem; font-weight: 800; margin-bottom: 1rem; }
+  .contact-cta p { color: var(--muted); font-size: 0.9rem; line-height: 1.75; margin-bottom: 2rem; }
+
+  /* FOOTER */
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 2rem 4rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.82rem;
+    color: var(--muted);
+  }
+  footer a { color: var(--accent); text-decoration: none; }
+
+  /* SCROLL ANIMATIONS */
+  .fade-up {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+  .fade-up.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  .fade-up:nth-child(2) { transition-delay: 0.1s; }
+  .fade-up:nth-child(3) { transition-delay: 0.2s; }
+  .fade-up:nth-child(4) { transition-delay: 0.3s; }
+
+  /* FIGMA BUTTON */
+  .figma-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-top: 1.1rem;
+    background: rgba(200,240,77,0.1);
+    border: 1px solid rgba(200,240,77,0.35);
+    color: var(--accent);
+    padding: 0.6rem 1.1rem;
+    border-radius: 8px;
+    font-size: 0.82rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: background 0.2s, transform 0.2s;
+  }
+  .figma-btn:hover { background: rgba(200,240,77,0.18); transform: translateY(-1px); }
+  .figma-hover-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(13,13,13,0.75);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 1rem;
+    color: var(--accent);
+    opacity: 0;
+    transition: opacity 0.2s;
+    border-radius: 0;
+    z-index: 2;
+  }
+  .proj-thumb:hover .figma-hover-overlay { opacity: 1; }
+
+  /* MAYORA CARD */
+  .mayora-card { grid-column: 1 / -1; }
+  .mayora-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 2rem;
+    padding: 2rem 2rem 0;
+  }
+  .mayora-header-left { flex: 1; }
+  .mayora-badge {
+    background: rgba(200,240,77,0.1);
+    border: 1px solid rgba(200,240,77,0.3);
+    border-radius: 12px;
+    padding: 0.75rem 1.25rem;
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: 1.2rem;
+    color: var(--accent);
+    text-align: center;
+    line-height: 1.3;
+    flex-shrink: 0;
+  }
+  .mayora-badge span { font-size: 0.7rem; font-weight: 600; letter-spacing: 0.1em; color: var(--muted); }
+  .mayora-kpis {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 1px;
+    background: var(--border);
+    margin-top: 1.5rem;
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+  }
+  .kpi-box {
+    background: var(--card);
+    padding: 1rem 1.25rem;
+  }
+  .kpi-label { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.07em; color: var(--muted); margin-bottom: 0.4rem; }
+  .kpi-val { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 1.15rem; color: var(--text); }
+  .kpi-change { font-size: 0.78rem; margin-top: 0.25rem; font-weight: 600; }
+  .kpi-change.pos { color: #5dde7a; }
+  .kpi-change.neg { color: #e05c5c; }
+  .mayora-body {
+    display: grid;
+    grid-template-columns: 1.4fr 1fr;
+    gap: 0;
+    border-top: 1px solid var(--border);
+    margin-top: 0;
+  }
+  .mayora-table-wrap { padding: 1.75rem 2rem; border-right: 1px solid var(--border); }
+  .mayora-section-title {
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 0.88rem;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 1rem;
+  }
+  .ratio-table { width: 100%; border-collapse: collapse; font-size: 0.82rem; }
+  .ratio-table th {
+    text-align: left;
+    color: var(--muted);
+    font-weight: 500;
+    padding: 0.4rem 0.5rem;
+    border-bottom: 1px solid var(--border);
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+  }
+  .ratio-table td { padding: 0.55rem 0.5rem; border-bottom: 1px solid rgba(255,255,255,0.04); color: var(--text); }
+  .ratio-table tr:last-child td { border-bottom: none; }
+  .status-good { color: #5dde7a; font-weight: 600; }
+  .status-warn { color: #f0a843; font-weight: 600; }
+  .status-bad { color: #e05c5c; font-weight: 600; }
+  .mayora-insight { padding: 1.75rem 2rem; }
+  .insight-item {
+    display: flex;
+    gap: 0.85rem;
+    align-items: flex-start;
+    margin-bottom: 1.1rem;
+    padding-bottom: 1.1rem;
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+  }
+  .insight-item:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+  .insight-icon {
+    width: 26px; height: 26px;
+    border-radius: 6px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 0.75rem;
+    font-weight: 800;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+  .insight-icon.pos { background: rgba(93,222,122,0.12); color: #5dde7a; }
+  .insight-icon.neg { background: rgba(224,92,92,0.12); color: #e05c5c; }
+  .insight-item strong { font-size: 0.85rem; }
+
+  @media (max-width: 900px) {
+    nav { padding: 1.2rem 1.5rem; }
+    .nav-links { gap: 1.5rem; }
+    .hero { padding: 7rem 1.5rem 4rem; }
+    .hero-content { grid-template-columns: 1fr; gap: 3rem; }
+    .hero-right { display: none; }
+    section { padding: 4rem 1.5rem; }
+    .about-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+    .contact-wrap { grid-template-columns: 1fr; }
+    footer { flex-direction: column; gap: 0.5rem; text-align: center; padding: 1.5rem; }
+    body { cursor: auto; }
+    .cursor, .cursor-ring { display: none; }
+    .mayora-kpis { grid-template-columns: repeat(2, 1fr); }
+    .mayora-body { grid-template-columns: 1fr; }
+    .mayora-table-wrap { border-right: none; border-bottom: 1px solid var(--border); }
+    .mayora-header { flex-direction: column; }
+  }
+</style>
+</head>
+<body>
+
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">YS.</div>
+  <ul class="nav-links">
+    <li><a href="#about">Tentang</a></li>
+    <li><a href="#education">Pendidikan</a></li>
+    <li><a href="#experience">Organisasi</a></li>
+    <li><a href="#projects">Proyek</a></li>
+    <li><a href="#contact">Kontak</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<div style="position:relative; overflow:hidden;">
+  <div class="hero-bg-text">YUSUF</div>
+  <div class="hero" id="hero">
+    <div class="hero-content">
+      <div class="hero-left">
+        <div class="hero-tag">Tersedia untuk kolaborasi</div>
+        <h1 class="hero-name">
+          Muhamad<br>
+          <span>Yusuf</span><br>
+          Segaff
+        </h1>
+        <p class="hero-desc">
+          Mahasiswa Business Administration di Politeknik LP3I Jakarta dengan fokus keuangan bisnis, desain digital, dan koordinasi organisasi.
+        </p>
+        <div class="hero-btns">
+          <a href="#projects" class="btn-primary">Lihat Proyek</a>
+          <a href="#contact" class="btn-ghost">Hubungi Saya</a>
+        </div>
+      </div>
+      <div class="hero-right">
+        <div class="hero-photo-wrap">
+          <div class="hero-photo-bg"></div>
+          <div class="hero-photo-deco"></div>
+          <div class="hero-photo-deco2"></div>
+          <div class="hero-photo">
+            <div class="hero-avatar-placeholder">👤</div>
+          </div>
+          <div class="hero-photo-label">
+            <div class="name">Yusuf Segaff</div>
+            <div class="role">Business Administration</div>
+          </div>
+          <div class="hero-stats">
+            <div class="stat-pill"><strong>2024</strong>Mulai Kuliah</div>
+            <div class="stat-pill"><strong>2+</strong>Proyek</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<hr class="divider">
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="fade-up"><div class="section-label">Tentang Saya</div></div>
+  <div class="fade-up">
+    <h2 class="section-title">Siapa saya?</h2>
+  </div>
+  <div class="about-grid">
+    <div class="fade-up">
+      <div class="section-sub" style="max-width:100%">Kemampuan yang saya kuasai</div>
+      <div class="about-skills" style="margin-top:1.5rem">
+        <div class="skill-item">
+          <div class="skill-header"><span>Analisis Keuangan</span><span>75%</span></div>
+          <div class="skill-bar"><div class="skill-fill" data-width="75"></div></div>
+        </div>
+        <div class="skill-item">
+          <div class="skill-header"><span>Perencanaan Operasional</span><span>70%</span></div>
+          <div class="skill-bar"><div class="skill-fill" data-width="70"></div></div>
+        </div>
+        <div class="skill-item">
+          <div class="skill-header"><span>UI/UX Design (Figma)</span><span>80%</span></div>
+          <div class="skill-bar"><div class="skill-fill" data-width="80"></div></div>
+        </div>
+        <div class="skill-item">
+          <div class="skill-header"><span>Koordinasi Acara</span><span>85%</span></div>
+          <div class="skill-bar"><div class="skill-fill" data-width="85"></div></div>
+        </div>
+        <div class="skill-item">
+          <div class="skill-header"><span>Desain Digital (Canva)</span><span>82%</span></div>
+          <div class="skill-bar"><div class="skill-fill" data-width="82"></div></div>
+        </div>
+      </div>
+    </div>
+    <div class="fade-up">
+      <div class="about-right">
+        <p>Halo! Saya <strong>Muhamad Yusuf Segaff</strong>, mahasiswa Business Administration semester awal di Politeknik LP3I Jakarta. Minat utama saya ada di bidang <strong>keuangan bisnis</strong> dan bagaimana angka-angka bisa dijadikan dasar keputusan strategis yang solid.</p>
+        <p>Di luar kelas, saya aktif di <strong>BEM LP3I</strong> sebagai Koordinator UKM, yang melatih saya untuk bekerja lintas divisi dan memimpin dalam situasi yang penuh dinamika. Saya juga punya ketertarikan di bidang desain digital yang membantu saya menyampaikan ide secara visual.</p>
+        <p>Saya percaya bahwa kombinasi antara kemampuan analitis dan kreativitas adalah kunci untuk menghadapi tantangan bisnis yang nyata.</p>
+        <div class="about-info">
+          <div class="info-item">
+            <div class="info-label">Lokasi</div>
+            <div class="info-val">Kemayoran, Jakarta Pusat</div>
+          </div>
+          <div class="info-item">
+            <div class="info-label">Email</div>
+            <div class="info-val">muhamadyusufq560@gmail.com</div>
+          </div>
+          <div class="info-item">
+            <div class="info-label">Telepon</div>
+            <div class="info-val">0895-0753-9599</div>
+          </div>
+          <div class="info-item">
+            <div class="info-label">Status</div>
+            <div class="info-val" style="color:var(--accent)">Aktif Kuliah</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- EDUCATION -->
+<section id="education">
+  <div class="fade-up"><div class="section-label">Pendidikan</div></div>
+  <div class="fade-up"><h2 class="section-title">Riwayat Pendidikan</h2></div>
+  <div class="edu-grid">
+    <div class="edu-card fade-up">
+      <div class="edu-icon">🎓</div>
+      <div>
+        <div class="edu-degree">Business Administration</div>
+        <div class="edu-school">Politeknik LP3I Jakarta</div>
+        <div class="edu-year">2024 — 2027</div>
+      </div>
+    </div>
+    <div class="edu-card fade-up">
+      <div class="edu-icon">📚</div>
+      <div>
+        <div class="edu-degree">Ilmu Pengetahuan Alam</div>
+        <div class="edu-school">SMA Muhammadiyah 16 Jakarta</div>
+        <div class="edu-year">2021 — 2024</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="fade-up"><div class="section-label">Pengalaman Organisasi</div></div>
+  <div class="fade-up"><h2 class="section-title">Keterlibatan Organisasi</h2></div>
+  <div class="exp-grid">
+    <div class="exp-card fade-up">
+      <div class="exp-header">
+        <div>
+          <div class="exp-org">BEM Politeknik LP3I</div>
+          <div class="exp-role">Koordinator UKM</div>
+        </div>
+        <div class="exp-period">2025 — 2026</div>
+      </div>
+      <p class="exp-desc">Memimpin dan mengkoordinasikan kegiatan Unit Kegiatan Mahasiswa di lingkup kampus. Bertanggung jawab atas perencanaan program, koordinasi antar divisi, serta memastikan kegiatan UKM berjalan sesuai target dan anggaran yang telah ditetapkan.</p>
+    </div>
+    <div class="exp-card fade-up">
+      <div class="exp-header">
+        <div>
+          <div class="exp-org">Ikatan Pemuda Muhammadiyah</div>
+          <div class="exp-role">Anggota Aktif</div>
+        </div>
+        <div class="exp-period">2022 — 2023</div>
+      </div>
+      <p class="exp-desc">Berpartisipasi aktif dalam kegiatan kepemudaan dan pemberdayaan masyarakat yang diinisiasi oleh organisasi. Mengembangkan kepekaan sosial serta kemampuan berorganisasi dalam skala komunitas.</p>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="fade-up"><div class="section-label">Proyek</div></div>
+  <div class="fade-up"><h2 class="section-title">Proyek yang Pernah<br>Saya Kerjakan</h2></div>
+  <div class="proj-grid">
+    <div class="proj-card fade-up">
+      <div class="proj-thumb proj-thumb-ui" style="height:220px;cursor:pointer;position:relative" onclick="window.open('https://figma.com/proto/HluLd1I4QCAwP1VLSReoIk/PROTOTYPE-MEALMATE?node-id=0-1&p=f&t=Qrl4U4aSkhDXJ4uV-0&scaling=scale-down&content-scaling=fixed&page-id=0%3A1&starting-point-node-id=1%3A2&show-proto-sidebar=1','_blank')">
+        <div class="proj-thumb-deco"></div>
+        <div style="position:relative;z-index:1;text-align:center">
+          <div style="font-size:3rem;margin-bottom:0.5rem">🍽️</div>
+          <div style="background:rgba(200,240,77,0.15);border:1px solid rgba(200,240,77,0.4);border-radius:8px;padding:0.4rem 0.9rem;font-size:0.78rem;color:var(--accent);font-weight:600;display:inline-flex;align-items:center;gap:0.4rem">
+            ↗ Lihat Prototype
+          </div>
+        </div>
+        <div class="figma-hover-overlay">↗ Buka di Figma</div>
+      </div>
+      <div class="proj-body">
+        <div class="proj-cat">UI/UX Design</div>
+        <div class="proj-name">MealMate App</div>
+        <p class="proj-desc">Merancang tampilan aplikasi pemesanan makanan berbasis mobile. Fokus pada user flow yang intuitif dan pengalaman pengguna yang efisien dari halaman beranda hingga checkout.</p>
+        <div class="proj-tools">
+          <span class="tool-tag">Figma</span>
+          <span class="tool-tag">Canva</span>
+          <span class="tool-tag">Mobile-First</span>
+        </div>
+        <a href="https://figma.com/proto/HluLd1I4QCAwP1VLSReoIk/PROTOTYPE-MEALMATE?node-id=0-1&p=f&t=Qrl4U4aSkhDXJ4uV-0&scaling=scale-down&content-scaling=fixed&page-id=0%3A1&starting-point-node-id=1%3A2&show-proto-sidebar=1" target="_blank" class="figma-btn">
+          ↗ Buka Prototype Figma
+        </a>
+      </div>
+    </div>
+    <div class="proj-card fade-up">
+      <div class="proj-thumb proj-thumb-event">
+        <div class="proj-thumb-deco"></div>
+        <span style="position:relative;z-index:1">🎪</span>
+      </div>
+      <div class="proj-body">
+        <div class="proj-cat">Event Management</div>
+        <div class="proj-name">BAZKOM SOEXSION</div>
+        <p class="proj-desc">Bertanggung jawab sebagai Sie Acara dalam bazaar kompetisi dengan total ±150 peserta dari kalangan umum dan kampus. Menyusun dan mengeksekusi rundown acara serta koordinasi lintas divisi.</p>
+        <div class="proj-tools">
+          <span class="tool-tag">Event Planning</span>
+          <span class="tool-tag">Koordinasi Tim</span>
+          <span class="tool-tag">Rundown</span>
+        </div>
+      </div>
+    </div>
+    <!-- MAYORA FINANCE PROJECT — FULL WIDTH -->
+  </div>
+
+  <!-- Mayora card full width -->
+  <div class="proj-card fade-up mayora-card" style="margin-top:1.5rem">
+    <div class="mayora-header">
+      <div class="mayora-header-left">
+        <div class="proj-cat" style="margin-bottom:0.3rem">Business Finance · Financial Management 2026</div>
+        <div class="proj-name" style="font-size:1.4rem">Analisis Keuangan Komparatif PT Mayora Indah Tbk</div>
+        <p style="color:var(--muted);font-size:0.875rem;margin-top:0.5rem;line-height:1.65">
+          Analisis komparatif laporan keuangan FY2024 vs FY2025 mencakup Income Statement, Balance Sheet, Cash Flow, Financial Ratio, Average Collection Period, serta proyeksi keuangan FY2026 menggunakan metode Percent of Sales dan DFN Model.
+        </p>
+        <div style="display:flex;flex-wrap:wrap;gap:0.5rem;margin-top:1rem">
+          <span class="tool-tag">Income Statement</span>
+          <span class="tool-tag">Balance Sheet</span>
+          <span class="tool-tag">Cash Flow</span>
+          <span class="tool-tag">Financial Ratio</span>
+          <span class="tool-tag">Percent of Sales</span>
+          <span class="tool-tag">DFN Model</span>
+          <span class="tool-tag">Kelompok 1</span>
+        </div>
+      </div>
+      <div class="mayora-badge">MYOR<br><span>IDX</span></div>
+    </div>
+
+    <!-- KPI Row -->
+    <div class="mayora-kpis">
+      <div class="kpi-box">
+        <div class="kpi-label">Net Sales FY2025</div>
+        <div class="kpi-val">Rp 38,68 T</div>
+        <div class="kpi-change pos">+7,23% YoY</div>
+      </div>
+      <div class="kpi-box">
+        <div class="kpi-label">Net Profit FY2025</div>
+        <div class="kpi-val">Rp 2,91 T</div>
+        <div class="kpi-change neg">-5,14% YoY</div>
+      </div>
+      <div class="kpi-box">
+        <div class="kpi-label">Total Aset FY2025</div>
+        <div class="kpi-val">Rp 31,38 T</div>
+        <div class="kpi-change pos">+5,55% YoY</div>
+      </div>
+      <div class="kpi-box">
+        <div class="kpi-label">Current Ratio</div>
+        <div class="kpi-val">3,38x</div>
+        <div class="kpi-change pos">+0,73x YoY</div>
+      </div>
+      <div class="kpi-box">
+        <div class="kpi-label">ACP FY2025</div>
+        <div class="kpi-val">81,65 hari</div>
+        <div class="kpi-change neg">+9,47 hari ⚠️</div>
+      </div>
+      <div class="kpi-box">
+        <div class="kpi-label">Debt Ratio</div>
+        <div class="kpi-val">41,48%</div>
+        <div class="kpi-change pos">-0,99% Membaik</div>
+      </div>
+    </div>
+
+    <!-- Ratio Table + Chart Toggle -->
+    <div class="mayora-body">
+      <div class="mayora-table-wrap">
+        <div class="mayora-section-title">Ringkasan Rasio Keuangan</div>
+        <table class="ratio-table">
+          <thead>
+            <tr><th>Rasio</th><th>FY2024</th><th>FY2025</th><th>Status</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Current Ratio</td><td>2,65x</td><td>3,38x</td><td class="status-good">✓ Sangat Baik</td></tr>
+            <tr><td>Quick Ratio</td><td>1,78x</td><td>2,42x</td><td class="status-good">✓ Sangat Baik</td></tr>
+            <tr><td>Gross Profit Margin</td><td>23,01%</td><td>21,95%</td><td class="status-warn">↓ Tertekan</td></tr>
+            <tr><td>Net Profit Margin</td><td>8,50%</td><td>7,52%</td><td class="status-warn">↓ Tertekan</td></tr>
+            <tr><td>ROA</td><td>10,32%</td><td>9,27%</td><td class="status-warn">↓ Menurun</td></tr>
+            <tr><td>ROE</td><td>17,94%</td><td>15,85%</td><td class="status-warn">↓ Menurun</td></tr>
+            <tr><td>Debt-to-Equity</td><td>0,74x</td><td>0,71x</td><td class="status-good">✓ Membaik</td></tr>
+            <tr><td>Avg Collection Period</td><td>72,19 hari</td><td>81,65 hari</td><td class="status-bad">⚠ Perlu Evaluasi</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="mayora-insight">
+        <div class="mayora-section-title">Key Insight</div>
+        <div class="insight-item">
+          <span class="insight-icon pos">▲</span>
+          <div><strong>Pertumbuhan Penjualan</strong><br><span style="color:var(--muted);font-size:0.82rem">Net Sales naik Rp 2,61 T (+7,23%) mencapai Rp 38,68 T didukung ekspansi pasar.</span></div>
+        </div>
+        <div class="insight-item">
+          <span class="insight-icon neg">▼</span>
+          <div><strong>Tekanan Profitabilitas</strong><br><span style="color:var(--muted);font-size:0.82rem">Laba bersih turun -5,14% akibat beban bunga melonjak +39,49% dari penerbitan obligasi baru.</span></div>
+        </div>
+        <div class="insight-item">
+          <span class="insight-icon pos">✓</span>
+          <div><strong>Likuiditas Kuat</strong><br><span style="color:var(--muted);font-size:0.82rem">Current ratio 3,38x dan kas operasi positif Rp 3,51 T (pembalikan dari -Rp 463 M di FY2024).</span></div>
+        </div>
+        <div class="insight-item">
+          <span class="insight-icon neg">⚠</span>
+          <div><strong>ACP Memanjang</strong><br><span style="color:var(--muted);font-size:0.82rem">Piutang tumbuh +21,3% melampaui penjualan +7,2%, perlu evaluasi kebijakan kredit.</span></div>
+        </div>
+        <div class="insight-item">
+          <span class="insight-icon pos">→</span>
+          <div><strong>Proyeksi FY2026</strong><br><span style="color:var(--muted);font-size:0.82rem">Total aset diproyeksikan Rp 37,06 T, Net Sales Rp 46,41 T (+20%), DFN Rp 3,33 T.</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div style="padding:0 2rem 1.5rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem">
+      <span style="font-size:0.75rem;color:var(--muted)">Sumber: Laporan Keuangan PT Mayora Indah Tbk FY2024 &amp; FY2025 | Financial Management 2026 · Kelompok 1</span>
+      <a href="https://drive.google.com/file/d/1eeJOnwE9wb2aybRxiL5i5_61DyBlcAF5/view?usp=sharing" target="_blank" class="figma-btn" style="margin-top:0">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+        Lihat Laporan Lengkap
+      </a>
+    </div>
+  </div>
+
+</section>
+
+<hr class="divider">
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="fade-up"><div class="section-label">Kontak</div></div>
+  <div class="fade-up"><h2 class="section-title">Mari Terhubung</h2></div>
+  <div class="contact-wrap">
+    <div class="contact-info fade-up">
+      <a class="contact-item" href="tel:08950753959" style="text-decoration:none;color:inherit">
+        <div class="contact-icon">📞</div>
+        <div>
+          <div class="contact-label">Telepon / WhatsApp</div>
+          <div class="contact-val">0895 - 0753 - 9599</div>
+        </div>
+      </a>
+      <a class="contact-item" href="mailto:muhamadyusufq560@gmail.com" style="text-decoration:none;color:inherit">
+        <div class="contact-icon">✉️</div>
+        <div>
+          <div class="contact-label">Email</div>
+          <div class="contact-val">muhamadyusufq560@gmail.com</div>
+        </div>
+      </a>
+      <div class="contact-item">
+        <div class="contact-icon">📍</div>
+        <div>
+          <div class="contact-label">Lokasi</div>
+          <div class="contact-val">Kemayoran, Jakarta Pusat</div>
+        </div>
+      </div>
+    </div>
+    <div class="contact-cta fade-up">
+      <h3>Punya proyek atau<br>ide untuk dibahas?</h3>
+      <p>Saya terbuka untuk kolaborasi, diskusi akademik, maupun kesempatan kerja sama. Jangan ragu untuk menghubungi saya!</p>
+      <a href="mailto:muhamadyusufq560@gmail.com" class="btn-primary">Kirim Email</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <span>© 2026 Muhamad Yusuf Segaff. All rights reserved.</span>
+  <span>Dibuat dengan ❤️ dari Jakarta</span>
+</footer>
+
+<script>
+  // Custom cursor
+  const cursor = document.getElementById('cursor');
+  const ring = document.getElementById('cursorRing');
+  let mx = 0, my = 0, rx = 0, ry = 0;
+  document.addEventListener('mousemove', e => {
+    mx = e.clientX; my = e.clientY;
+    cursor.style.left = (mx - 5) + 'px';
+    cursor.style.top = (my - 5) + 'px';
+  });
+  function animateRing() {
+    rx += (mx - rx - 18) * 0.12;
+    ry += (my - ry - 18) * 0.12;
+    ring.style.left = rx + 'px';
+    ring.style.top = ry + 'px';
+    requestAnimationFrame(animateRing);
+  }
+  animateRing();
+  document.querySelectorAll('a, button').forEach(el => {
+    el.addEventListener('mouseenter', () => { ring.style.width = '56px'; ring.style.height = '56px'; });
+    el.addEventListener('mouseleave', () => { ring.style.width = '36px'; ring.style.height = '36px'; });
+  });
+
+  // Scroll fade
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        // animate skill bars
+        if (e.target.querySelector) {
+          e.target.querySelectorAll('.skill-fill').forEach(bar => {
+            bar.style.width = bar.dataset.width + '%';
+          });
+        }
+      }
+    });
+  }, { threshold: 0.15 });
+
+  document.querySelectorAll('.fade-up').forEach(el => obs.observe(el));
+
+  // Also trigger skill bars when about section comes into view
+  const aboutObs = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.querySelectorAll('.skill-fill').forEach(bar => {
+          bar.style.width = bar.dataset.width + '%';
+        });
+      }
+    });
+  }, { threshold: 0.2 });
+  const aboutSection = document.getElementById('about');
+  if (aboutSection) aboutObs.observe(aboutSection);
+
+  // Active nav highlight
+  const sections = document.querySelectorAll('section[id]');
+  const navLinks = document.querySelectorAll('.nav-links a');
+  window.addEventListener('scroll', () => {
+    let cur = '';
+    sections.forEach(s => {
+      if (window.scrollY >= s.offsetTop - 200) cur = s.id;
+    });
+    navLinks.forEach(a => {
+      a.style.color = a.getAttribute('href') === '#' + cur ? 'var(--text)' : '';
+    });
+  });
+</script>
+</body>
+</html>
